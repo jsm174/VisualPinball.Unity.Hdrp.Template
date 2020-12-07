@@ -1,0 +1,13 @@
+{
+  "name": "org.visualpinball.unity.template.hd",
+  "displayName": "Visual Pinball High Definition RP",
+  "version": "0.1.0",
+  "type": "template",
+  "host": "hub",
+  "unity": "2020.2",
+  "description": "This template utilizes the High Definition Render Pipeline for making Visual Pinball Tables.",
+  "dependencies": {
+    "com.unity.cinemachine": "2.6.1",
+    "com.unity.render-pipelines.high-definition": "10.2.0"
+  }
+}

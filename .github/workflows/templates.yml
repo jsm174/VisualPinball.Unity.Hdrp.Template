@@ -1,0 +1,50 @@
+on: [push]
+
+jobs:
+
+  project-template-hd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare
+        id: prepare
+        run: |
+           SHA8=${GITHUB_SHA::8}
+           NAME="VisualPinball.Unity.ProjectTemplates-HD-${SHA8}"
+           echo ::set-output name=NAME::${NAME}
+      - name: Checkout project
+        uses: actions/checkout@v2
+        with:
+           path: build
+      - name: Download Test Table Assets
+        uses: satackey/action-google-drive@v1
+        with:
+           skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
+           download-from: /VisualPinball.Engine/assets-test-table-hd.zip
+           download-to: ./
+           google-client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
+           google-client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      - name: Uncompress Test Table Assets
+        run: |
+           unzip assets-test-table-hd.zip -d ./build/org.visualpinball.unity.template.hd/ProjectData~/Assets
+      - name: Checkout VisualPinball.Engine
+        uses: actions/checkout@v2
+        with:
+           repository: freezy/VisualPinball.Engine
+           path: build/org.visualpinball.unity.template.hd/ProjectData~/Packages/VisualPinball.Engine
+      - name: Checkout VisualPinball.Unity.Hdrp
+        uses: actions/checkout@v2
+        with:
+           repository: freezy/VisualPinball.Unity.Hdrp
+           path: build/org.visualpinball.unity.template.hd/ProjectData~/Packages/VisualPinball.Unity.Hdrp
+      - name: Package Template
+        run: |
+           mkdir artifacts
+           cp -r build/org.visualpinball.unity.template.hd package
+           rm -rf package/ProjectData~/Packages/VisualPinball.Engine/.git
+           rm -rf package/ProjectData~/Packages/VisualPinball.Unity.Hdrp/.git
+           tar czvf artifacts/org.visualpinball.unity.template.hd.tgz package 
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+           name: ${{ steps.prepare.outputs.NAME }}
+           path: artifacts

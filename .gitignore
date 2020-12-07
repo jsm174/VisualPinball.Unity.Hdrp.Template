@@ -1,0 +1,5 @@
+VisualPinball.Engine
+VisualPinball.Unity.Hdrp
+**/Assets/Scenes
+**/Assets/Scenes.meta
+.DS_Store
