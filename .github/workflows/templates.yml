@@ -9,7 +9,7 @@ jobs:
         id: prepare
         run: |
            SHA8=${GITHUB_SHA::8}
-           NAME="VisualPinball.Unity.ProjectTemplates-HD-${SHA8}"
+           NAME="VisualPinball.Unity.ProjectTemplate-hd-${SHA8}"
            echo ::set-output name=NAME::${NAME}
       - name: Checkout project
         uses: actions/checkout@v2
