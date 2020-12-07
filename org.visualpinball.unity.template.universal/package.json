@@ -1,0 +1,12 @@
+{
+  "name": "org.visualpinball.unity.template.universal",
+  "displayName": "Visual Pinball Universal Render Pipeline",
+  "version": "0.1.0",
+  "type": "template",
+  "unity": "2020.2",
+  "host": "hub",
+  "description": "This template utilizes the Universal Definition Render Pipeline for making Visual Pinball Tables.",
+  "dependencies": {
+    "com.unity.render-pipelines.universal": "10.2.0"
+  }
+}
