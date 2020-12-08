@@ -87,3 +87,55 @@ jobs:
         with:
            name: ${{ steps.prepare.outputs.ARTIFACT }}
            path: ${{ steps.prepare.outputs.PACKAGE }}
+
+  project-template-pandeli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare
+        id: prepare
+        run: |
+           SHA8=${GITHUB_SHA::8}
+           TYPE="pandeli"
+           VERSION="0.1.0"
+           BASE="org.visualpinball.unity.template.${TYPE}"
+           NAME="${BASE}.${VERSION}"
+           PACKAGE="${NAME}.tgz"
+           ARTIFACT="${NAME}-${SHA8}"
+           echo ::set-output name=TYPE::${TYPE}
+           echo ::set-output name=BASE::${BASE}
+           echo ::set-output name=PACKAGE::${PACKAGE}
+           echo ::set-output name=ARTIFACT::${ARTIFACT}
+      - name: Checkout project
+        uses: actions/checkout@v2
+        with:
+           path: build
+           submodules: true
+      - name: Get Shared Library
+        uses: actions/checkout@v2
+        with:
+           repository: freezy/VisualPinball.AssetLibrary
+           path: AssetLibrary
+           lfs: true
+      - name: Move Shared Library
+        run: |
+           mv AssetLibrary/VisualPinball.SharedLibrary ./build/${{ steps.prepare.outputs.BASE }}/ProjectData~/Packages
+#      - name: Download Test Table Assets
+#        uses: satackey/action-google-drive@v1
+#        with:
+#           skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
+#           download-from: /VisualPinball.Engine/assets-test-table-${{ steps.prepare.outputs.TYPE }}.zip
+#           download-to: ./
+#           google-client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
+#           google-client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+#      - name: Uncompress Test Table Assets
+#        run: |
+#           unzip assets-test-table-${{ steps.prepare.outputs.TYPE }}.zip -d ./build/${{ steps.prepare.outputs.BASE }}/ProjectData~/Assets
+      - name: Package Template
+        run: |
+           cp -r build/${{ steps.prepare.outputs.BASE }} package
+           tar czvf ${{ steps.prepare.outputs.PACKAGE }} package
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+           name: ${{ steps.prepare.outputs.ARTIFACT }}
+           path: ${{ steps.prepare.outputs.PACKAGE }}
