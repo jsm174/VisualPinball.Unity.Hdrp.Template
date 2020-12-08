@@ -27,7 +27,7 @@ On macOS:
 
 # To Do
 
-- Replace all project depedency modules with git submodules.
+~~Replace all project depedency modules with git submodules.~~
 
 # Notes (for myself)
 

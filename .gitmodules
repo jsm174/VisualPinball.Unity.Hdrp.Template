@@ -1,0 +1,12 @@
+[submodule "org.visualpinball.unity.template.hd/ProjectData~/Packages/VisualPinball.Unity.Hdrp"]
+	path = org.visualpinball.unity.template.hd/ProjectData~/Packages/VisualPinball.Unity.Hdrp
+	url = https://github.com/freezy/VisualPinball.Unity.Hdrp
+[submodule "org.visualpinball.unity.template.hd/ProjectData~/Packages/VisualPinball.Engine"]
+	path = org.visualpinball.unity.template.hd/ProjectData~/Packages/VisualPinball.Engine
+	url = https://github.com/freezy/VisualPinball.Engine
+[submodule "org.visualpinball.unity.template.universal/ProjectData~/Packages/VisualPinball.Unity.Urp"]
+	path = org.visualpinball.unity.template.universal/ProjectData~/Packages/VisualPinball.Unity.Urp
+	url = https://github.com/freezy/VisualPinball.Unity.Urp
+[submodule "org.visualpinball.unity.template.universal/ProjectData~/Packages/VisualPinball.Engine"]
+	path = org.visualpinball.unity.template.universal/ProjectData~/Packages/VisualPinball.Engine
+	url = https://github.com/freezy/VisualPinball.Engine
