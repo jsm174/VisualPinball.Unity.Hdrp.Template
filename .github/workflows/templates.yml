@@ -115,6 +115,7 @@ jobs:
         with:
            repository: freezy/VisualPinball.AssetLibrary
            path: AssetLibrary
+           token: ${{ secrets.REPO_GITHUB_PAT }}
            lfs: true
       - name: Move Shared Library
         run: |
